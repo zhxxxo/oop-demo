@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students | OOP Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero compact">
+        <a class="back" href="index.html">← Back to overview</a>
+        <h1>Student list</h1>
+        <p>Loaded from <code>GET /api/students</code> · the list mixes
+           <code>Student</code> and <code>GraduateStudent</code> objects.</p>
+    </header>
+
+    <main>
+        <div id="status" class="status">Loading…</div>
+        <div id="list" class="grid"></div>
+    </main>
+
+    <footer>
+        <span>oop-demo · Spring Boot 3 · Java 21</span>
+    </footer>
+
+    <script>
+        const listEl = document.getElementById('list');
+        const statusEl = document.getElementById('status');
+
+        fetch('/api/students')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
+            .then(students => {
+                statusEl.textContent = students.length + ' records';
+                listEl.innerHTML = students.map(s => `
+                    <article class="card student">
+                        <div class="row">
+                            <h2>${s.name}</h2>
+                            <span class="tag ${s.level === 'Graduate' ? 'grad' : ''}">${s.level}</span>
+                        </div>
+                        <p class="meta">${s.major} · GPA ${s.gpa.toFixed(2)}</p>
+                        <p class="code">${s.summary}</p>
+                    </article>
+                `).join('');
+            })
+            .catch(error => {
+                statusEl.textContent = 'Failed to load: ' + error.message;
+                statusEl.classList.add('error');
+            });
+    </script>
+</body>
+</html>

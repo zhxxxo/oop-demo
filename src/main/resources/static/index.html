@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP Demo | Spring Boot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <span class="badge">BIT235 · Object Oriented Programming</span>
+        <h1>OOP Demo</h1>
+        <p>A small Spring Boot application that demonstrates classes, inheritance,
+           polymorphism and a REST endpoint, served together with static HTML pages.</p>
+        <div class="actions">
+            <a class="btn primary" href="students.html">View students →</a>
+            <a class="btn ghost" href="/api/students" target="_blank">Raw JSON</a>
+        </div>
+    </header>
+
+    <main class="grid">
+        <section class="card">
+            <h2>Encapsulation</h2>
+            <p><code>Student</code> keeps its fields private and exposes them through
+               getters only, so the state cannot be changed by accident from outside.</p>
+        </section>
+        <section class="card">
+            <h2>Inheritance</h2>
+            <p><code>GraduateStudent</code> extends <code>Student</code> and adds a thesis
+               topic on top of the inherited state.</p>
+        </section>
+        <section class="card">
+            <h2>Polymorphism</h2>
+            <p><code>getLevel()</code> and <code>describe()</code> are overridden, so one
+               list of <code>Student</code> references prints two different formats.</p>
+        </section>
+        <section class="card">
+            <h2>Layered design</h2>
+            <p>Controller → Service → Model. Each layer talks only to the one below it,
+               which keeps the code easy to test and extend.</p>
+        </section>
+    </main>
+
+    <footer>
+        <span>oop-demo · Spring Boot 3 · Java 21</span>
+    </footer>
+</body>
+</html>
